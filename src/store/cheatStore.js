@@ -1,9 +1,8 @@
 import { create } from 'zustand'
-import useCashStore from './cashStore'
 import useHeatStore from './heatStore'
 
 const STORAGE_KEY = 'energy-factory-cheats'
-const BASE_DISSIPATION = 0.1
+export const BASE_DISSIPATION = 0.1
 
 function loadCheats() {
   try {
@@ -40,17 +39,5 @@ const useCheatStore = create((set, get) => ({
     }
   },
 }))
-
-export function applyCheats() {
-  const { startCash, fastDissipate } = useCheatStore.getState()
-
-  if (startCash) {
-    useCashStore.getState().add(10000)
-  }
-
-  if (fastDissipate) {
-    useHeatStore.setState({ dissipationRate: BASE_DISSIPATION * 100 })
-  }
-}
 
 export default useCheatStore

@@ -1,6 +1,6 @@
-import useTickStore from './tickStore'
-import useEntityStore from './entityStore'
-import useSpeedStore, { SPEEDS } from './speedStore'
+import useTickStore from '../store/tickStore'
+import useEntityStore from '../store/entityStore'
+import useSpeedStore, { SPEEDS } from '../store/speedStore'
 
 let intervalId = null
 let unsubscribe = null

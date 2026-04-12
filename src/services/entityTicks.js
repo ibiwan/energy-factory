@@ -1,5 +1,5 @@
-import useHeatStore from './heatStore'
-import usePowerStore from './powerStore'
+import useHeatStore from '../store/heatStore'
+import usePowerStore from '../store/powerStore'
 
 const ORTHOGONAL = [[-1, 0], [1, 0], [0, -1], [0, 1]]
 const NEIGHBORS = [[0, 0], ...ORTHOGONAL]
