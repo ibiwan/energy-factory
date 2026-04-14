@@ -47,3 +47,9 @@ export function stopGameLoop() {
   }
   useTickStore.getState().setRunning(false)
 }
+
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    startGameLoop()
+  })
+}

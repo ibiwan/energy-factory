@@ -118,6 +118,70 @@ main {
   text-align: left;
 }
 
+/* Upgrades */
+.upgrade-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.upgrade-card {
+  background: #1a1a2a;
+  border: 1px solid #334;
+  border-radius: 4px;
+  padding: 12px 14px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.upgrade-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.upgrade-name {
+  font-weight: 700;
+  color: #ccddff;
+  font-size: 13px;
+}
+
+.upgrade-level {
+  font-size: 11px;
+  color: #778;
+}
+
+.upgrade-desc {
+  font-size: 11px;
+  color: #99a;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.upgrade-buy-btn {
+  margin-top: 4px;
+  padding: 5px 8px;
+  background: #223344;
+  border: 1px solid #445566;
+  border-radius: 3px;
+  color: #aaccee;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.upgrade-buy-btn:hover:not(:disabled) {
+  background: #334455;
+}
+
+.upgrade-buy-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
 /* Reactor layout */
 .view.reactor {
   display: flex;
@@ -126,17 +190,41 @@ main {
 }
 
 .tool-palette {
-  width: 30%;
-  flex-shrink: 0;
-}
-
-.tool-palette {
+  flex: 0 0 auto;
   overflow-y: auto;
 }
 
-.tool-palette h3 {
-  margin: 12px 0;
-  color: var(--text-h);
+.tool-pane-nav {
+  display: flex;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.tool-pane-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  background: #555;
+  border: none;
+  border-radius: 3px;
+  color: #aaa;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.tool-pane-btn:hover {
+  opacity: 0.85;
+}
+
+.tool-pane-btn.active {
+  background: #334;
+  color: #fff;
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
 }
 
 .status-area {
@@ -240,8 +328,65 @@ main {
 
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 60px);
   gap: 2px;
+}
+
+.tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.tool-list-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  background: #aab;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,0.5),
+    inset -2px -2px 0 rgba(0,0,0,0.25);
+  transition: background 0.1s;
+}
+
+.tool-list-row:hover {
+  background: #bbc;
+}
+
+.tool-list-row.selected {
+  background: #334;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,0.1),
+    inset -2px -2px 0 rgba(0,0,0,0.4);
+}
+
+.tool-list-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-list-icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tool-list-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #223;
+  letter-spacing: 0.04em;
+}
+
+.tool-list-row.selected .tool-list-name {
+  color: #aaccff;
 }
 
 .tool-slot {
@@ -257,17 +402,24 @@ main {
   padding: 4px;
 }
 
-.canister {
+.canister,
+.capacitor,
+.heat-vent,
+.heat-exchanger,
+.heat-inlet,
+.heat-outlet,
+.reflector {
   width: 100%;
   height: 100%;
 }
 
 
 .reactor-main {
-  flex: 1;
+  flex: 12 0 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
 }
 
 .tool-description {
@@ -331,10 +483,34 @@ main {
   align-items: center;
   justify-content: center;
   padding: 2px;
+  position: relative;
+}
+
+.tile-status-bar-track {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 88%;
+  height: 10%;
+  background: #222;
+  border-radius: 2px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tile-status-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.15s;
 }
 
 .reactor-tile .canister,
-.reactor-tile .battery,
+.reactor-tile .capacitor,
+.reactor-tile .heat-vent,
+.reactor-tile .heat-exchanger,
+.reactor-tile .heat-inlet,
+.reactor-tile .heat-outlet,
+.reactor-tile .reflector,
 .reactor-tile .explosion {
   width: 100%;
   height: 100%;

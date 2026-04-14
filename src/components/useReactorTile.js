@@ -9,18 +9,26 @@ function placeTool(tool) {
     tier: tool.tier,
     cost: tool.cost,
     pulses: tool.pulses,
+    selfPulses: tool.selfPulses,
     power: tool.power,
     heat: tool.heat,
     life: tool.life,
     maxLife: tool.life,
     powerCapacity: tool.powerCapacity,
     heatCapacity: tool.heatCapacity,
+    heat: tool.heat,
+    color: tool.color,
+    icon: tool.icon,
+    maxLife: tool.life,
+    dissipation: tool.dissipation,
+    maxDelta: tool.maxDelta,
+    delta: tool.delta,
     currentHeat: 0,
   }
 }
 
 function onPlace(entity) {
-  if (entity.type === 'battery') {
+  if (entity.type === 'capacitor') {
     usePowerStore.getState().setMaxPower(
       usePowerStore.getState().maxPower + entity.powerCapacity
     )
@@ -28,7 +36,7 @@ function onPlace(entity) {
 }
 
 function onRemove(entity) {
-  if (entity.type === 'battery') {
+  if (entity.type === 'capacitor') {
     usePowerStore.getState().setMaxPower(
       usePowerStore.getState().maxPower - entity.powerCapacity
     )

@@ -1,4 +1,4 @@
-export default function Canister({ fillLevel = 0.5, className = '' }) {
+export default function Canister({ fillLevel = 0.5, className = '', color = '#39ff14' }) {
   return (
     <svg
       className={`canister ${className}`}
@@ -37,14 +37,14 @@ export default function Canister({ fillLevel = 0.5, className = '' }) {
         </clipPath>
       </defs>
 
-      {/* Fluid fill */}
+      {/* Fluid fill — full or empty, no gradations */}
       <rect
         x="6"
-        y={12 + 36 * (1 - fillLevel)}
+        y="12"
         width="28"
-        height={36 * fillLevel}
-        fill="#39ff14"
-        opacity="0.85"
+        height="36"
+        fill={fillLevel > 0 ? color : '#444'}
+        opacity={fillLevel > 0 ? '0.85' : '0.5'}
         clipPath="url(#glass-clip)"
       />
 

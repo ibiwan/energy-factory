@@ -16,9 +16,14 @@ export default function ToolDescription() {
         <li>Cost: ${tool.cost}</li>
         {tool.pulses != null && <li>Pulses: {tool.pulses}/tick</li>}
         {tool.power != null && <li>Power: {tool.power}/pulse</li>}
-        {tool.heat != null && <li>Heat: {tool.heat}/pulse</li>}
+        {tool.heat != null && <li>Heat: {tool.heat}/pulse²</li>}
         {tool.life != null && <li>Life: {tool.life} ticks</li>}
         {tool.powerCapacity != null && <li>+{tool.powerCapacity} max power</li>}
+        {tool.heatCapacity != null && <li>Heat capacity: {tool.heatCapacity}</li>}
+        {tool.dissipation != null && <li>Dissipation: {tool.dissipation}/tick</li>}
+        {tool.maxDelta != null && <li>Max delta: {tool.maxDelta}/tick</li>}
+        {tool.delta != null && <li>Delta: {tool.delta}/neighbor/tick</li>}
+        {tool.type === 'reflector' && <li>+10% power per adjacent cell</li>}
       </ul>
     </div>
   )

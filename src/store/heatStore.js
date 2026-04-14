@@ -7,6 +7,7 @@ const useHeatStore = create((set, get) => ({
   maxHeat: 1000,
   buffer: 1000,
   delta: 0,
+  lastRejection: 0,
   dissipationRate: 0.1,
   _history: [],
 
@@ -16,10 +17,12 @@ const useHeatStore = create((set, get) => ({
     set((state) => ({
       heat: Math.max(0, state.heat + amount),
     })),
-  recordTick: (actual) => {
-    const history = [...get()._history, actual].slice(-WINDOW)
+  recordTick: (heatProduced, rejection = 0) => {
+    const { dissipationRate, _history } = get()
+    const net = heatProduced - rejection - dissipationRate
+    const history = [..._history, net].slice(-WINDOW)
     const delta = history.reduce((s, v) => s + v, 0) / history.length
-    set({ _history: history, delta })
+    set({ _history: history, delta, lastRejection: rejection })
   },
 }))
 
